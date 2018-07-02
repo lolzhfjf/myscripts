@@ -9,10 +9,15 @@ red='\033[0;31m'
 nocol='\033[0m'
 echo "Starting"
 echo "Making"
-make -j8 O=out \
-                      ARCH=arm64 \
-                      CC=$KERNEL_DIR/linux-x86/clan-4053586/bin/clang \                     
-                      CLANG_TRIPLE=aarch64-linux-gnu- \
-                      CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+export ARCH=arm64 
+export CC=$KERNEL_DIR/linux-x86/clan-4053586/bin/clang 
+export CLANG_TRIPLE=aarch64-linux-gnu- 
+export CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+
+make -j8 O=out 
+                      
+                                           
+                      
+                      
 
 
