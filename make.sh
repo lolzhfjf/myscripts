@@ -13,6 +13,6 @@ make -j8 O=out \
                       ARCH=arm64 \
                       CC=$KERNEL_DIR/linux-x86/clan-4053586/bin/clang \                     
                       CLANG_TRIPLE=aarch64-linux-gnu- \
-                      CROSS_COMPILE=aarch64-linux-android-4.9/bin/aarch64-linux-android-
+                      CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
 
