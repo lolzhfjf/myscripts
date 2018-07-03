@@ -1,6 +1,6 @@
 #!/bin/sh
 make O=out ARCH=arm64 X00TD_defconfig
-ccache -M 300G
+#ccache -M 300G
 BUILD_START=$(date +"%s")
 
 blue='\033[0;34m' cyan='\033[0;36m'
