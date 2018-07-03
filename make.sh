@@ -16,6 +16,7 @@ export CROSS_COMPILE=/home/runner/Azure-ASUS/aarch64-linux-android-4.9/bin/aarch
 
 make -j8 O=out 
 BUILD_END=$(date +"%s")
+BUILD_TIME=$(date +"%Y%m%d-%T");
 DIFF=$(($BUILD_END - $BUILD_START))
 blue='\033[0;34m' cyan='\033[0;36m'
 yellow='\033[0;33m'
