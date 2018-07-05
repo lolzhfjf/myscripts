@@ -1,11 +1,11 @@
 #!/bin/sh
 
 KERNEL_DIR=$PWD
-git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9
+git clone --depth 1 --no-single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9
 
-git clone https://github.com/Panchajanya1999/AnyKernel2.git
+git clone --depth 1 --no-single-branch https://github.com/Panchajanya1999/AnyKernel2.git
 
-git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
+git clone --depth 1 --no-single-branch https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
 cd linux-x86 && rm -rf clang-3289846 clang-4639204 clang-4679922 clang-4691093
 cd ../
 ccache -M 300G
