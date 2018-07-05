@@ -5,10 +5,11 @@ git clone --depth 1 --no-single-branch https://android.googlesource.com/platform
 
 git clone --depth=1 --no-single-branch https://github.com/Panchajanya1999/AnyKernel2.git
 
-git clone --depth=1 --no-single-branch https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
-cd linux-x86 && rm -rf clang-3289846 clang-4639204 clang-4679922 clang-4691093 clang-r328903 clang-stable
-cd ../
+#git clone --depth=1 --no-single-branch https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
+#cd linux-x86 && rm -rf clang-3289846 clang-4639204 clang-4679922 clang-4691093 clang-r328903 clang-stable
+#cd ../
 #ccache -M 100G
+git clone --depth=1 https://github.com/Panchajanya1999/clang-5.0.git
 export CROSS_COMPILE=
 export ARCH=arm64
 export SUBARCH=arm64
@@ -25,7 +26,7 @@ echo "Starting"
 echo "Making"
 make -j8 O=out \
                       ARCH=arm64 \
-                      CC=/home/runner/Azure-ASUS/linux-x86/clang-4053586/bin/clang \
+                      CC=/home/runner/Azure-ASUS/clang-5.0/clang-4053586/bin/clang \
                       CLANG_TRIPLE=aarch64-linux-gnu- \
                       CROSS_COMPILE=/home/runner/Azure-ASUS/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
