@@ -8,7 +8,7 @@ git clone --depth 1 --no-single-branch https://github.com/Panchajanya1999/AnyKer
 git clone --depth 1 --no-single-branch https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
 cd linux-x86 && rm -rf clang-3289846 clang-4639204 clang-4679922 clang-4691093 clang-r328903 clang-stable
 cd ../
-ccache -M 300G
+ccache -M 100G
 export CROSS_COMPILE=
 export ARCH=arm64
 export SUBARCH=arm64
@@ -36,7 +36,8 @@ blue='\033[0;34m' cyan='\033[0;36m'
 yellow='\033[0;33m'
 red='\033[0;31m'
 nocol='\033[0m'
-echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol";
+echo -e "$yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
+rm -rf linux-x86
                       
                                            
                       
