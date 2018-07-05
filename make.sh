@@ -1,6 +1,20 @@
 #!/bin/sh
+
+KERNEL_DIR=$PWD
+git clone https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9
+
+git clone https://github.com/Panchajanya1999/AnyKernel2.git
+
+git clone https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86
+cd linux-x86 && rm -rf clang-3289846 clang-4639204 clang-4679922 clang-4691093
+cd ../
+ccache -M 300G
+export CROSS_COMPILE=
+export ARCH=arm64
+export SUBARCH=arm64
 make O=out ARCH=arm64 X00TD_defconfig
-#ccache -M 300G
+
+
 BUILD_START=$(date +"%s")
 
 blue='\033[0;34m' cyan='\033[0;36m'
@@ -9,12 +23,12 @@ red='\033[0;31m'
 nocol='\033[0m'
 echo "Starting"
 echo "Making"
-export ARCH=arm64 
-export CC=/home/runner/Azure-ASUS/linux-x86/clan-4053586/bin/clang 
-export CLANG_TRIPLE=aarch64-linux-gnu- 
-export CROSS_COMPILE=/home/runner/Azure-ASUS/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+make -j8 O=out \
+                      ARCH=arm64 \
+                      CC=/home/runner/Azure-ASUS/linux-x86/clang-4053586/bin/clang \
+                      CLANG_TRIPLE=aarch64-linux-gnu- \
+                      CROSS_COMPILE=/home/runner/Azure-ASUS/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
-make -j8 O=out 
 BUILD_END=$(date +"%s")
 BUILD_TIME=$(date +"%Y%m%d-%T");
 DIFF=$(($BUILD_END - $BUILD_START))
