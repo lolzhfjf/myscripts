@@ -12,5 +12,7 @@ zip -r AzurE-Oreo-X00TD-$BUILD_TIME *
 
 #curl -s -X POST "https://api.telegram.org/bot508917321:AAFcpu2eS7MC0THx0/sendMessage" -d chat_id="-1001232545787" -d text="Build Completed for ASUS X00TD"
 
-curl -F chat_id="-1001232545787" -F document=AzurE-Oreo-X00TD-$BUILD_TIME.zip https://api.telegram.org/bot508917321:AAFcSMMFzWdr-2wBsmKFhypu2eS7MC0THx0/sendDocument
+#curl -F chat_id="-1001232545787" -F document=AzurE-Oreo-X00TD-$BUILD_TIME.zip https://api.telegram.org/bot508917321:AAHg8-vR5WeLnXKe_7BHv6FaAYWkKxIHYjY/sendDocument
 
+
+curl -F chat_id="-1001232545787" -F document=@"AzurE-Oreo-X00TD-$BUILD_TIME.zip" https://api.telegram.org/bot508917321:AAFcSMMFzWdr-2wBsmKFhypu2eS7MC0THx0/sendDocument
