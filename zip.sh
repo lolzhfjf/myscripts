@@ -15,4 +15,4 @@ zip -r AzurE-Oreo-X00TD-$BUILD_TIME *
 #curl -F chat_id="-1001232545787" -F document=AzurE-Oreo-X00TD-$BUILD_TIME.zip https://api.telegram.org/bot508917321:AAHg8-vR5WeLnXKe_7BHv6FaAYWkKxIHYjY/sendDocument
 
 
-curl -F chat_id="-1001232545787" -F document=@"AzurE-Oreo-X00TD-$BUILD_TIME.zip" https://api.telegram.org/bot508917321:AAFcSMMFzWdr-2wBsmKFhypu2eS7MC0THx0/sendDocument
+curl -F chat_id="-1001232545787" -F document=@"AzurE-Oreo-X00TD-$BUILD_TIME.zip" https://api.telegram.org/bot508917321:AAHSX2mi-idya7i7DdTiOsy6as19sJThMxE/sendDocument
