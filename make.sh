@@ -26,9 +26,9 @@ echo "Starting"
 echo "Making"
 make -j8 O=out \
                       ARCH=arm64 \
-                      CC=/home/runner/Azure-ASUS/clang-5.0/clang-4053586/bin/clang \
+                      CC=/home/runner/msm-4.4.y/clang-5.0/clang-4053586/bin/clang \
                       CLANG_TRIPLE=aarch64-linux-gnu- \
-                      CROSS_COMPILE=/home/runner/Azure-ASUS/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+                      CROSS_COMPILE=/home/runner/msm-4.4.y/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
 BUILD_END=$(date +"%s")
 BUILD_TIME=$(date +"%Y%m%d-%T");

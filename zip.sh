@@ -1,6 +1,6 @@
 #!/bin/sh
 cd AnyKernel2
-mv /home/runner/Azure-ASUS/out/arch/arm64/boot/Image.gz-dtb Image.gz-dtb
+mv /home/runner/msm-4.4.y/out/arch/arm64/boot/Image.gz-dtb Image.gz-dtb
 BUILD_TIME=$(date +"%Y%m%d-%T")
 zip -r AzurE-Oreo-X00TD-$BUILD_TIME *
 
