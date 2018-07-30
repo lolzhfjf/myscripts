@@ -4,7 +4,7 @@ export KBUILD_BUILD_HOST="macbook"
 rm -rf py2env
 mkdir py2env && virtualenv2 py2env
 source py2env/bin/activate
-##WILL BE USING CLANG COMPILER ONWARDS
+##WILL BE SETTING CROSS_COMPILE to gcc tool chain's bin
 export CROSS_COMPILE=/home/panchajanya/Kernel/Toolchains/my-toolchain/bin/aarch64-linux-android-
 export ARCH=arm64
 export SUBARCH=arm64
@@ -22,6 +22,8 @@ red='\033[0;31m'
 nocol='\033[0m'
 echo "Starting"
 echo "Making"
+
+#Set Location to Clang Toolchain Bin, same will go for CC
 CLANG_TCHAIN=/home/panchajanya/Kernel/Toolchains/clang-7.0.0/llvm-build/Release+Asserts/bin/clang
 export KBUILD_COMPILER_STRING="$(${CLANG_TCHAIN} --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g')"
 make -j8 O=out \
