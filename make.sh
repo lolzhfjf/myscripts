@@ -9,11 +9,12 @@ git clone --depth=1 --no-single-branch https://github.com/Panchajanya1999/AnyKer
 #cd linux-x86 && rm -rf clang-3289846 clang-4639204 clang-4679922 clang-4691093 clang-r328903 clang-stable
 #cd ../
 #ccache -M 100G
-git clone --depth=1 https://github.com/Panchajanya1999/clang-5.0.git
+git clone --depth=1 https://github.com/Panchajanya1999/clang-r328903.git
 export CROSS_COMPILE=
 export ARCH=arm64
 export SUBARCH=arm64
 make O=out ARCH=arm64 X00TD_defconfig
+export KBUILD_COMPILER_STRING=$(/home/runner/msm-4.4.y/clang-r328903/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
 
 
 BUILD_START=$(date +"%s")
@@ -26,7 +27,7 @@ echo "Starting"
 echo "Making"
 make -j8 O=out \
                       ARCH=arm64 \
-                      CC=/home/runner/msm-4.4.y/clang-5.0/clang-4053586/bin/clang \
+                      CC=/home/runner/msm-4.4.y/clang-r328903/bin/clang \
                       CLANG_TRIPLE=aarch64-linux-gnu- \
                       CROSS_COMPILE=/home/runner/msm-4.4.y/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
