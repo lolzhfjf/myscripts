@@ -13,6 +13,7 @@ git clone --depth=1 https://github.com/Panchajanya1999/clang-r328903.git
 export CROSS_COMPILE=
 export ARCH=arm64
 export SUBARCH=arm64
+export USE_CCACHE=1
 make O=out ARCH=arm64 X00TD_defconfig
 export KBUILD_COMPILER_STRING=$(/home/runner/msm-4.4.y/clang-r328903/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
 
