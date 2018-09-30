@@ -2,7 +2,7 @@
 cd AnyKernel2
 mv /home/runner/msm-4.4.y/out/arch/arm64/boot/Image.gz-dtb Image.gz-dtb
 BUILD_TIME=$(date +"%Y%m%d-%T")
-zip -r AzurE-Oreo-X00TD-$BUILD_TIME *
+zip -r AzurE-X00TD-$BUILD_TIME *
 
 
 #POSTCHANNEL=$(printf 'Build Completed Successfully..!!\nDevice : ASUS X00TD\nBuild Details : $(BUILD_TIME)\n\nInstructions To Flash This Build :- \n 1)Dirty Flashing Your ROM is Necessary...!!!\n 2)Wipe Dalvik & Cache after flashing...!!\n\nNote :- This Build is a Continuous Integration Build, Compiled with CLANG 5...!!!\nEnjoy Flashing\nThank You -@Whiteliners')
@@ -15,4 +15,4 @@ zip -r AzurE-Oreo-X00TD-$BUILD_TIME *
 #curl -F chat_id="-1001232545787" -F document=AzurE-Oreo-X00TD-$BUILD_TIME.zip https://api.telegram.org/bot508917321:AAHg8-vR5WeLnXKe_7BHv6FaAYWkKxIHYjY/sendDocument
 
 
-curl -F chat_id="-1001232545787" -F document=@"AzurE-Oreo-X00TD-$BUILD_TIME.zip" https://api.telegram.org/bot508917321:AAHSX2mi-idya7i7DdTiOsy6as19sJThMxE/sendDocument
+curl -F chat_id="-1001232545787" -F document=@"AzurE-X00TD-$BUILD_TIME.zip" https://api.telegram.org/bot508917321:AAHSX2mi-idya7i7DdTiOsy6as19sJThMxE/sendDocument
