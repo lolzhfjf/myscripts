@@ -10,6 +10,8 @@ git clone --depth=1 --no-single-branch https://github.com/Panchajanya1999/AnyKer
 #cd ../
 #ccache -M 100G
 git clone --depth=1 https://github.com/Panchajanya1999/clang-r328903.git
+export KBUILD_BUILD_USER="ci"
+export KBUILD_BUILD_HOST="semaphore"
 export CROSS_COMPILE=
 export ARCH=arm64
 export SUBARCH=arm64
