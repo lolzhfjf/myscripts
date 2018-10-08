@@ -17,7 +17,7 @@ export ARCH=arm64
 export SUBARCH=arm64
 export USE_CCACHE=1
 make O=out ARCH=arm64 X00TD_defconfig
-export KBUILD_COMPILER_STRING=$(/home/runner/msm-4.4.y/clang-r328903/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+export KBUILD_COMPILER_STRING=$(/home/runner/msm-4.4/clang-r328903/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
 
 
 BUILD_START=$(date +"%s")
@@ -30,9 +30,9 @@ echo "Starting"
 echo "Making"
 make -j8 O=out \
                       ARCH=arm64 \
-                      CC=/home/runner/msm-4.4.y/clang-r328903/bin/clang \
+                      CC=/home/runner/msm-4.4/clang-r328903/bin/clang \
                       CLANG_TRIPLE=aarch64-linux-gnu- \
-                      CROSS_COMPILE=/home/runner/msm-4.4.y/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+                      CROSS_COMPILE=/home/runner/msm-4.4/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 
 BUILD_END=$(date +"%s")
 BUILD_TIME=$(date +"%Y%m%d-%T");

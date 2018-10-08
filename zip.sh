@@ -1,6 +1,6 @@
 #!/bin/sh
 cd AnyKernel2
-mv /home/runner/msm-4.4.y/out/arch/arm64/boot/Image.gz-dtb Image.gz-dtb
+mv /home/runner/msm-4.4/out/arch/arm64/boot/Image.gz-dtb Image.gz-dtb
 BUILD_TIME=$(date +"%Y%m%d-%T")
 zip -r AzurE-X00TD-$BUILD_TIME *
 md5sum AzurE-X00TD-$BUILD_TIME.zip > AzurE-X00TD-$BUILD_TIME.md5
