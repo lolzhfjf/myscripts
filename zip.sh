@@ -2,7 +2,7 @@
 cd AnyKernel2
 mv /home/runner/msm-4.4/out/arch/arm64/boot/Image.gz-dtb Image.gz-dtb
 BUILD_TIME=$(date +"%Y%m%d-%T")
-zip -r AzurE-X00TD-$BUILD_TIME *
+zip -r AzurE-X00TD-$BUILD_TIME * -x .git README.md
 md5sum AzurE-X00TD-$BUILD_TIME.zip > AzurE-X00TD-$BUILD_TIME.md5
 
 
