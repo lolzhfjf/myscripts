@@ -13,15 +13,15 @@ function colors {
 
 colors;
 
-function clone {
+function clone_clang {
 	echo " "
 	echo "★★Cloning GCC Toolchain from Android GoogleSource .."
 	sleep 2
 	git clone --depth 1 --no-single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git
 	echo "★★GCC cloning done"
 	sleep 2
-	echo "★★Cloning Clang 7 sources (r328903)"
-	git clone --depth=1 https://github.com/Panchajanya1999/clang-r328903.git
+	echo "★★Cloning Clang 8 sources ()"
+	git clone --depth=1 https://github.com/Panchajanya1999/clang8.git
 	echo "★★Clang Done, Now Its time for AnyKernel .."
 	git clone --depth=1 --no-single-branch https://github.com/Panchajanya1999/AnyKernel2.git
 	echo "★★Cloning Kinda Done..!!!"
@@ -32,7 +32,10 @@ function exports {
 	export KBUILD_BUILD_HOST="semaphore"
 	export ARCH=arm64
 	export SUBARCH=arm64
-	export KBUILD_COMPILER_STRING=$($KERNEL_DIR/clang-r328903/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+	if [ -d $KERNEL_DIR/clang8 ]
+	then
+	export KBUILD_COMPILER_STRING=$($KERNEL_DIR/clang8/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+	fi
 }
 
 function tg_post_msg {
@@ -65,7 +68,7 @@ function build_kernel {
 	BUILD_START=$(date +"%s")
 	tg_post_msg "★★Build Started on $(uname) $(uname -r)★★"
 	make -j8 O=out \
-		CC=$KERNEL_DIR/clang-r328903/bin/clang \
+		CC=$KERNEL_DIR/clang8/bin/clang \
 		CLANG_TRIPLE=aarch64-linux-gnu- \
 		CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 	BUILD_END=$(date +"%s")
@@ -104,7 +107,7 @@ function gen_zip {
 	fi
 }
 
-clone
+clone_clang
 exports
 build_kernel
 check_img
