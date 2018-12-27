@@ -39,13 +39,11 @@ function exports {
 }
 
 function tg_post_msg {
-	curl -s -X POST "$BOT_MSG_URL" -d chat_id="$CHANNEL_ID" -d text="$1"
-	curl -s -X POST "$BOT_MSG_URL" -d chat_id="$GROUP_ID" -d text="$1"
+	curl -s -X POST "$BOT_MSG_URL" -d chat_id="$2" -d text="$1"
 }
 
 function tg_post_build {
-	curl -F chat_id="$CHANNEL_ID" -F document=@"$1" $BOT_BUILD_URL
-	curl -F chat_id="$GROUP_ID" -F document=@"$1" $BOT_BUILD_URL
+	curl -F chat_id="$2" -F document=@"$1" $BOT_BUILD_URL
 }
 
 function build_kernel {
@@ -58,7 +56,7 @@ function build_kernel {
 		DEFCONFIG=X00TD_defconfig
 	else
 		echo "Defconfig Mismatch"
-		tg_post_msg "☠☠Defconfig Mismatch..!! Build Failed..!!👎👎"
+		tg_post_msg "☠☠Defconfig Mismatch..!! Build Failed..!!👎👎" "$GROUP_ID"
 		echo "Exiting in 5 seconds"
 		sleep 5
 		exit
@@ -66,7 +64,7 @@ function build_kernel {
 	
 	make O=out $DEFCONFIG
 	BUILD_START=$(date +"%s")
-	tg_post_msg "★★Build Started on $(uname) $(uname -r)★★"
+	tg_post_msg "★★Build Started on $(uname) $(uname -r)★★" "$GROUP_ID"
 	make -j8 O=out \
 		CC=$KERNEL_DIR/clang8/bin/clang \
 		CLANG_TRIPLE=aarch64-linux-gnu- \
@@ -80,19 +78,19 @@ function check_img {
 	if [ -f $KERNEL_DIR/out/arch/arm64/boot/Image.gz-dtb ]
 	then 
 		echo -e "Kernel Built Successfully in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
-		tg_post_msg "👍👍Kernel Built Successfully in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
-		#gen_changelog
+		tg_post_msg "👍👍Kernel Built Successfully in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!" "$GROUP_ID"
+		gen_changelog
 		gen_zip
 	else 
 		echo -e "Kernel failed to compile after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
-		tg_post_msg "☠☠Kernel failed to compile after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
+		tg_post_msg "☠☠Kernel failed to compile after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!" "$GROUP_ID"
 		exit
 	fi	
 }
 
 function gen_changelog {
 	tg_post_msg "★★ChangeLog --
-	$(git log --oneline --decorate --color --pretty=%s --first-parent -7)"
+	$(git log --oneline --decorate --color --pretty=%s --first-parent -7)" "$GROUP_ID"
 }
 
 function gen_zip {
@@ -102,7 +100,7 @@ function gen_zip {
 		mv $KERNEL_DIR/out/arch/arm64/boot/Image.gz-dtb AnyKernel2/Image.gz-dtb
 		cd AnyKernel2
 		zip -r AzurE-X00TD-$BUILD_TIME * -x .git README.md
-		tg_post_build "AzurE-X00TD-$BUILD_TIME.zip"
+		tg_post_build "AzurE-X00TD-$BUILD_TIME.zip" "$GROUP_ID"
 		cd ..
 	fi
 }
