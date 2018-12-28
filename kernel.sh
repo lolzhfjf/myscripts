@@ -35,6 +35,8 @@ function exports {
 	if [ -d $KERNEL_DIR/clang8 ]
 	then
 	export KBUILD_COMPILER_STRING=$($KERNEL_DIR/clang8/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+	LD_LIBRARY_PATH=$KERNEL_DIR/clang8/lib64:$LD_LIBRARY_PATH
+	export LD_LIBRARY_PATH
 	fi
 }
 
@@ -68,7 +70,7 @@ function build_kernel {
 	make -j8 O=out \
 		CC=$KERNEL_DIR/clang8/bin/clang \
 		CLANG_TRIPLE=aarch64-linux-gnu- \
-		CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+		CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android- > logs.txt
 	BUILD_END=$(date +"%s")
 	BUILD_TIME=$(date +"%Y%m%d-%T")
 	DIFF=$(($BUILD_END - $BUILD_START))	
@@ -79,11 +81,13 @@ function check_img {
 	then 
 		echo -e "Kernel Built Successfully in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
 		tg_post_msg "👍👍Kernel Built Successfully in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!" "$GROUP_ID"
+		tg_post_build "logs.txt" "$GROUP_ID"
 		gen_changelog
 		gen_zip
 	else 
 		echo -e "Kernel failed to compile after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
 		tg_post_msg "☠☠Kernel failed to compile after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!" "$GROUP_ID"
+		tg_post_build "logs.txt" "$GROUP_ID"
 		exit
 	fi	
 }
