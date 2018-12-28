@@ -35,9 +35,10 @@ function exports {
 	if [ -d $KERNEL_DIR/clang8 ]
 	then
 	export KBUILD_COMPILER_STRING=$($KERNEL_DIR/clang8/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
-	LD_LIBRARY_PATH=$KERNEL_DIR/clang8/lib64
-	export LD_LIBRARY_PATH
-	export LLVM_AR=
+	LD_LIBRARY_PATH=$KERNEL_DIR/clang8/lib64:$LD_LIBRARY_PATH
+	LLVM_AR=$KERNEL_DIR/clang8/bin/llvm-ar
+	LLVM_DIS=$KERNEL_DIR/clang8/bin/llvm-dis
+	export LD_LIBRARY_PATH LLVM_AR LLVM_DIS
 	fi
 }
 
@@ -82,13 +83,13 @@ function check_img {
 	then 
 		echo -e "Kernel Built Successfully in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
 		tg_post_msg "👍👍Kernel Built Successfully in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!" "$GROUP_ID"
-		tg_post_build "logs.txt" "$GROUP_ID"
+		tg_post_build "logcat.txt" "$GROUP_ID"
 		gen_changelog
 		gen_zip
 	else 
 		echo -e "Kernel failed to compile after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
 		tg_post_msg "☠☠Kernel failed to compile after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!" "$GROUP_ID"
-		tg_post_build "logs.txt" "$GROUP_ID"
+		tg_post_build "logcat.txt" "$GROUP_ID"
 		exit
 	fi	
 }
