@@ -70,7 +70,7 @@ function build_kernel {
 	make -j8 O=out \
 		CC=$KERNEL_DIR/clang8/bin/clang \
 		CLANG_TRIPLE=aarch64-linux-gnu- \
-		CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android- > logs.txt
+		CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android- &> logs.txt
 	BUILD_END=$(date +"%s")
 	BUILD_TIME=$(date +"%Y%m%d-%T")
 	DIFF=$(($BUILD_END - $BUILD_START))	
