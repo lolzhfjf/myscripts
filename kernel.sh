@@ -21,7 +21,8 @@ function clone_clang {
 	echo "★★GCC cloning done"
 	sleep 2
 	echo "★★Cloning Clang 8 sources ()"
-	git clone https://github.com/Panchajanya1999/clang8.git
+	git clone https://github.com/Panchajanya1999/clang-4691093.git
+	mv clang-4691093 clang8
 	echo "★★Clang Done, Now Its time for AnyKernel .."
 	git clone --no-single-branch https://github.com/Panchajanya1999/AnyKernel2.git
 	echo "★★Cloning Kinda Done..!!!"
