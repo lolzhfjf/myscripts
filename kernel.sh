@@ -17,13 +17,13 @@ function clone_clang {
 	echo " "
 	echo "★★Cloning GCC Toolchain from Android GoogleSource .."
 	sleep 2
-	git clone --depth 1 --no-single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git
+	git clone --no-single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git
 	echo "★★GCC cloning done"
 	sleep 2
 	echo "★★Cloning Clang 8 sources ()"
-	git clone --depth=1 https://github.com/Panchajanya1999/clang8.git
+	git clone https://github.com/Panchajanya1999/clang8.git
 	echo "★★Clang Done, Now Its time for AnyKernel .."
-	git clone --depth=1 --no-single-branch https://github.com/Panchajanya1999/AnyKernel2.git
+	git clone --no-single-branch https://github.com/Panchajanya1999/AnyKernel2.git
 	echo "★★Cloning Kinda Done..!!!"
 }
 
