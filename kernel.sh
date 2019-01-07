@@ -41,7 +41,7 @@ function clone {
 	echo "★★Cloning Clang 7 sources (r328903)"
 	git clone --depth=1 https://github.com/Panchajanya1999/clang-r328903.git
 	echo "★★Clang Done, Now Its time for AnyKernel .."
-	git clone --depth=1 --no-single-branch https://github.com/Panchajanya1999/AnyKernel2.git
+	git clone --depth=1 --no-single-branch https://github.com/Pqhas/AnyKernel2.git
 	echo "★★Cloning Kinda Done..!!!"
 }
 
