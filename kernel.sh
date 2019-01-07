@@ -67,12 +67,12 @@ function tg_post_build {
 
 function build_kernel {
 	#better checking defconfig at first
-	if [ -f $KERNEL_DIR/arch/arm64/configs/X00T_defconfig ]
+	if [ -f $KERNEL_DIR/arch/arm64/configs/whyred_defconfig ]
 	then 
-		DEFCONFIG=X00T_defconfig
-	elif [ -f $KERNEL_DIR/arch/arm64/configs/X00TD_defconfig ]
+		DEFCONFIG=whyred_defconfig
+	elif [ -f $KERNEL_DIR/arch/arm64/configs/whyred_defconfig ]
 	then
-		DEFCONFIG=X00TD_defconfig
+		DEFCONFIG=whyred_defconfig
 	else
 		echo "Defconfig Mismatch"
 		tg_post_msg "☠☠Defconfig Mismatch..!! Build Failed..!!👎👎" "$GROUP_ID"
@@ -118,8 +118,8 @@ function gen_zip {
 		echo "Zipping Files.."
 		mv $KERNEL_DIR/out/arch/arm64/boot/Image.gz-dtb AnyKernel2/Image.gz-dtb
 		cd AnyKernel2
-		zip -r9 AzurE-X00TD-$BUILD_TIME * -x .git README.md
-		tg_post_build "AzurE-X00TD-$BUILD_TIME.zip" "$GROUP_ID"
+		zip -r9 GreenKernel-whyded-$BUILD_TIME * -x .git README.md
+		tg_post_build "GreenKernel-whyded-$BUILD_TIME.zip" "$GROUP_ID"
 		cd ..
 	fi
 }
