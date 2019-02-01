@@ -39,7 +39,7 @@ function clone {
 	echo "★★GCC cloning done"
 	sleep 2
 	echo "★★Cloning Clang 7 sources (r328903)"
-	git clone --depth=1 https://github.com/Panchajanya1999/clang-r328903.git
+	git clone --depth=1 https://github.com/Panchajanya1999/clang-llvm.git -b 8.0
 	echo "★★Clang Done, Now Its time for AnyKernel .."
 	git clone --depth=1 --no-single-branch https://github.com/Pqhas/AnyKernel2.git
 	echo "★★Cloning Kinda Done..!!!"
@@ -50,10 +50,10 @@ function exports {
 	export KBUILD_BUILD_HOST="semaphore"
 	export ARCH=arm64
 	export SUBARCH=arm64
-	export KBUILD_COMPILER_STRING=$($KERNEL_DIR/clang-r328903/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
-	LD_LIBRARY_PATH=$KERNEL_DIR/clang-r328903/lib64:$LD_LIBRARY_PATH
+	export KBUILD_COMPILER_STRING=$($KERNEL_DIR/clang-llvm/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+	LD_LIBRARY_PATH=$KERNEL_DIR/clang-llvm/lib64:$LD_LIBRARY_PATH
 	export LD_LIBRARY_PATH
-	PATH=$KERNEL_DIR/clang-r328903/bin/:$KERNEL_DIR/aarch64-linux-android-4.9/bin/:$PATH
+	PATH=$KERNEL_DIR/clang-llvm/bin/:$KERNEL_DIR/aarch64-linux-android-4.9/bin/:$PATH
 	export PATH
 }
 
@@ -67,12 +67,12 @@ function tg_post_build {
 
 function build_kernel {
 	#better checking defconfig at first
-	if [ -f $KERNEL_DIR/arch/arm64/configs/whyred_defconfig ]
+	if [ -f $KERNEL_DIR/arch/arm64/configs/X00T_defconfig ]
 	then 
-		DEFCONFIG=whyred_defconfig
-	elif [ -f $KERNEL_DIR/arch/arm64/configs/whyred_defconfig ]
+		DEFCONFIG=X00T_defconfig
+	elif [ -f $KERNEL_DIR/arch/arm64/configs/X00TD_defconfig ]
 	then
-		DEFCONFIG=whyred_defconfig
+		DEFCONFIG=X00TD_defconfig
 	else
 		echo "Defconfig Mismatch"
 		tg_post_msg "☠☠Defconfig Mismatch..!! Build Failed..!!👎👎" "$GROUP_ID"
@@ -85,24 +85,24 @@ function build_kernel {
 	BUILD_START=$(date +"%s")
 	tg_post_msg "★★ Build Started on $(uname) $(uname -r) ★★" "$GROUP_ID"
 	make -j8 O=out \
-		CC=$KERNEL_DIR/clang-r328903/bin/clang \
+		CC=$KERNEL_DIR/clang-llvm/bin/clang \
 		CLANG_TRIPLE=aarch64-linux-gnu- \
 		CROSS_COMPILE=$KERNEL_DIR/aarch64-linux-android-4.9/bin/aarch64-linux-android- 2>&1 | tee logcat.txt
 	BUILD_END=$(date +"%s")
 	BUILD_TIME=$(date +"%Y%m%d-%T")
-	DIFF=$(($BUILD_END - $BUILD_START))	
+	DIFF=$((BUILD_END - BUILD_START))	
 }
 
 function check_img {
 	if [ -f $KERNEL_DIR/out/arch/arm64/boot/Image.gz-dtb ]
 	then 
-		echo -e "Kernel Built Successfully in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
-		tg_post_msg "👍👍Kernel Built Successfully in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!" "$GROUP_ID"
+		echo -e "Kernel Built Successfully in $((DIFF / 60)) minute(s) and $((DIFF % 60)) seconds..!!"
+		tg_post_msg "👍👍Kernel Built Successfully in $((DIFF / 60)) minute(s) and $((DIFF % 60)) seconds..!!" "$GROUP_ID"
 		gen_changelog
 		gen_zip
 	else 
-		echo -e "Kernel failed to compile after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!"
-		tg_post_msg "☠☠Kernel failed to compile after $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds..!!" "$GROUP_ID"
+		echo -e "Kernel failed to compile after $((DIFF / 60)) minute(s) and $((DIFF % 60)) seconds..!!"
+		tg_post_msg "☠☠Kernel failed to compile after $((DIFF / 60)) minute(s) and $((DIFF % 60)) seconds..!!" "$GROUP_ID"
 		tg_post_build "logcat.txt" "$GROUP_ID"
 	fi	
 }
