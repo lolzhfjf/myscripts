@@ -67,12 +67,12 @@ function tg_post_build {
 
 function build_kernel {
 	#better checking defconfig at first
-	if [ -f $KERNEL_DIR/arch/arm64/configs/X00T_defconfig ]
+	if [ -f $KERNEL_DIR/arch/arm64/configs/whyred_defconfig ]
 	then 
-		DEFCONFIG=X00T_defconfig
-	elif [ -f $KERNEL_DIR/arch/arm64/configs/X00TD_defconfig ]
+		DEFCONFIG=whyred_defconfig
+	elif [ -f $KERNEL_DIR/arch/arm64/configs/whyred_defconfig ]
 	then
-		DEFCONFIG=X00TD_defconfig
+		DEFCONFIG=whyred_defconfig
 	else
 		echo "Defconfig Mismatch"
 		tg_post_msg "☠☠Defconfig Mismatch..!! Build Failed..!!👎👎" "$GROUP_ID"
