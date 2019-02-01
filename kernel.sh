@@ -36,7 +36,9 @@ function clone {
 	echo "★★Cloning GCC Toolchain from Android GoogleSource .."
 	sleep 2
 	git clone --depth=1 --no-single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9.git
-	echo "★★GCC cloning done"
+	echo "★★GCC64 cloning done"
+	git clone --depth=1 --no-single-branch https://android.googlesource.com/platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9.git
+	echo "★★GCC32 cloning done"
 	sleep 2
 	echo "★★Cloning Clang 7 sources (r328903)"
 	git clone --depth=1 https://github.com/Panchajanya1999/clang-llvm.git -b 8.0
@@ -54,6 +56,7 @@ function exports {
 	LD_LIBRARY_PATH=$KERNEL_DIR/clang-llvm/lib64:$LD_LIBRARY_PATH
 	export LD_LIBRARY_PATH
 	PATH=$KERNEL_DIR/clang-llvm/bin/:$KERNEL_DIR/aarch64-linux-android-4.9/bin/:$PATH
+	export CROSS_COMPILE_ARM32=$KERNEL_DIR/arm-linux-androideabi-4.9/bin/arm-opt-linux-androideabi-
 	export PATH
 }
 
