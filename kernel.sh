@@ -48,8 +48,8 @@ function clone {
 }
 
 function exports {
-	export KBUILD_BUILD_USER="ci"
-	export KBUILD_BUILD_HOST="semaphore"
+	export KBUILD_BUILD_USER="lolfhd22"
+	export KBUILD_BUILD_HOST="semaphoreci"
 	export ARCH=arm64
 	export SUBARCH=arm64
 	export KBUILD_COMPILER_STRING=$($KERNEL_DIR/clang-llvm/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
